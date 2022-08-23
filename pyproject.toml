@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "royalark"
+version = "0.1.0"
+description = ""
+authors = ["Farkhad <frada1985@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^4.1"
+psycopg2 = "^2.9.3"
+pandas = "^1.4.3"
+SQLAlchemy = "^1.4.40"
+django-rest-framework = "^0.1.0"
+django-split-settings = "^1.1.0"
+django-filter = "^22.1"
+python-dotenv = "^0.20.0"
+drf-spectacular = "^0.23.1"
+factory-boy = "^3.2.1"
+pytest-django = "^4.5.2"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^5.0.4"
+django-extensions = "^3.2.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
