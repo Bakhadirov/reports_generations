@@ -44,5 +44,6 @@
 2. /api/v1/reports/installs1/ - вывод данных из таблицы installs1
 3. api/v1/users/registration/ - регистрация
 4. api/v1/users/login/ - логин
-4. api/v1/schema/ - yaml schema
-5. api/v1/docs/ - схема проекта отображаемая в браузере
+5. api/v1/schema/ - yaml schema
+6. api/v1/docs/ - схема проекта отображаемая в браузере
+7. api/v1/reports/ - вывод сводного отчета(в разработке)
