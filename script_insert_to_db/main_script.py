@@ -10,9 +10,11 @@ DB_URL = f'postgresql+psycopg2://{user}:{password}@{host}/{database}'
 
 
 def read_data_from_scv(filepath: Path) -> pd.DataFrame:
-    df = pd.read_csv(filepath, sep=',')
-    return df.drop(df.columns[0], axis=1)
 
+    df = pd.read_csv(filepath, sep=',')
+    df.rename(columns={'Unnamed: 0': 'id',}, inplace=True)
+    # return df.drop(df.columns[0], axis=1)
+    return df
 
 def load_df_to_db(dataframe: pd.DataFrame, frame_name: str, engine: Engine) -> None:
     try:

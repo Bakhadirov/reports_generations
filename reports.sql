@@ -1,5 +1,6 @@
 -- В настоящем скрипте необходимо менять необходимые для получения данные
 -- на 9 и 10 строке. Даты построения отчета, media_source и campaign
+
 with a as (
     select
         campaign ,
@@ -15,7 +16,7 @@ b as (
     from installs1 i
     group by campaign
 )
-select *
+select a.campaign, a.event_revenue_sum, a.event_revenue_usd_sum, b.count_installs
 from a
 left join b
 on a.campaign = b.campaign

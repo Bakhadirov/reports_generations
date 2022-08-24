@@ -1,4 +1,4 @@
-from django.db.models import Count, Sum
+from django.db.models import Count, Sum, F
 from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
@@ -46,11 +46,33 @@ class UserRegistrationView(CreateAPIView):
     serializer_class = UserSerializer
 
 
+# class ReportsView(ListAPIView):
+#     queryset = Events.objects.all()
+#     serializer_class = ReportsGenerationSerializer
+#
+#     def get_queryset(self):
+#          reports_generation =Events.objects.annotate(sub_total=F(Count(('install1__event_name') )))
+#          return reports_generation
+
+# class ReportsView(ListAPIView):
+#     sql = "with a as (" \
+#           "select campaign , sum(event_revenue) as event_revenue_sum, " \
+#           "sum(event_revenue_usd) as event_revenue_usd_sum from events e " \
+#           "group by campaign)," \
+#           "b as (select" \
+#           "campaign, count(event_name) as count_installs" \
+#           "from installs1 i " \
+#           "group by campaign)" \
+#           "select a.campaign, a.event_revenue_sum, a.event_revenue_usd_sum, b.count_installs" \
+#           "from a" \
+#           "left join b" \
+#           "on a.campaign = b.campaign"
+#
+#     serializer_class = ReportsGenerationSerializer
+#     queryset = Events.objects.raw(sql)
+
 class ReportsView(ListAPIView):
-    queryset = Events.objects.all()
+    # sql = "with a as (select campaign, sum(event_revenue) as event_revenue_sum, sum(event_revenue_usd) as event_revenue_usd_sum from events e group by campaign), b as (select campaign, count(event_name) as count_installs from installs1 i group by campaign select a.campaign) a.event_revenue_sum, a.event_revenue_usd_sum, b.count_installs from a left join b on a.campaign = b.campaign"
+    sql = "with a as (select 1 as id, campaign ,sum(event_revenue) as event_revenue_sum, sum(event_revenue_usd) as event_revenue_usd_sum from events e group by campaign),b as (select 1 as id, campaign, count(event_name) as count_installs from installs1 i group by campaign) select a.campaign, a.event_revenue_sum, a.event_revenue_usd_sum, b.count_installs from a left join b on a.campaign = b.campaign"
     serializer_class = ReportsGenerationSerializer
-
-    def get_queryset(self):
-        return Events.objects.aggregate(event_revenue_sum = Sum('event_revenue'),
-                                       event_revenue_usd_sum = Sum('event_revenue_usd'))
-
+    queryset = Events.objects.raw(sql)

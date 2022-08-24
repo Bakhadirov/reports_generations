@@ -9,8 +9,9 @@ class User(AbstractUser):
 
 
 class Events(models.Model):
+    id = models.IntegerField(primary_key=True)
     install_time = models.DateTimeField()
-    event_time = models.DateTimeField(primary_key=True)
+    event_time = models.DateTimeField()
     appsflyer_id = models.CharField(max_length=255, blank=True)
     media_source = models.CharField(max_length=255, blank=True)
     campaign = models.CharField(max_length=255, blank=True)
@@ -25,8 +26,9 @@ class Events(models.Model):
 
 
 class Installs1(models.Model):
+    id = models.IntegerField(primary_key=True)
     install_time = models.DateTimeField()
-    event_time = models.DateTimeField(primary_key=True)
+    event_time = models.DateTimeField()
     appsflyer_id = models.CharField(max_length=255, blank=True)
     media_source = models.CharField(max_length=255, blank=True)
     campaign = models.CharField(max_length=255, blank=True)

@@ -11,7 +11,7 @@ UserModel = get_user_model()
 class EventsSerializers(serializers.ModelSerializer):
     class Meta:
         model = Events
-        fields = ('install_time',
+        fields = ( 'install_time',
                   'event_time',
                   'appsflyer_id',
                   'media_source',
@@ -25,7 +25,8 @@ class EventsSerializers(serializers.ModelSerializer):
 class Install1Serializers(serializers.ModelSerializer):
     class Meta:
         model = Installs1
-        fields = ('install_time',
+        fields = ('id',
+                  'install_time',
                   'event_time',
                   'appsflyer_id',
                   'media_source',
@@ -83,12 +84,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ReportsGenerationSerializer(serializers.Serializer):
-    event_revenue_sum = serializers.IntegerField()
-    event_revenue_usd_sum = serializers.IntegerField()
+    # event_revenue_sum = serializers.IntegerField()
+    # event_revenue_usd_sum = serializers.IntegerField()
 
     class Meta:
         model = Events
-        fields = ('campaign', 'event_revenue_sum', 'event_revenue_usd_sum')
+        fields = ('id', 'campaign', 'event_revenue_sum', 'event_revenue_usd_sum', 'count_installs')
 
         # Post.objects.annotate(
 #             viewers_count= Count('viewers', distinct=True),
