@@ -55,8 +55,8 @@ class ReportsViewPagination(PageNumberPagination):
 
 class ReportsView(ListAPIView):
     # sql = "with a as (select campaign , sum(event_revenue) as event_revenue_sum, sum(event_revenue_usd) as event_revenue_usd_sum from events e group by campaign, b as (select campaign, count(event_name) as count_installs from installs1 i group by campaign) select a.campaign, a.event_revenue_sum, a.event_revenue_usd_sum, b.count_installs from a left join b on a.campaign = b.campaign)"
-    sql = 'select 1 as id, campaign, sum(event_revenue) as event_revenue_sum, sum(event_revenue_usd) as event_revenue_usd_sum from events e group by campaign'
-
+    # sql = 'select 1 as id, campaign, sum(event_revenue) as event_revenue_sum, sum(event_revenue_usd) as event_revenue_usd_sum from events e group by campaign'
+    sql = 'select 1 as id, e.campaign , sum(e.event_revenue) as event_revenue_sum, sum(e.event_revenue_usd) as event_revenue_usd_sum, count(i.event_name) as count_installs from events e left join installs1 i  on i.campaign = e.campaign group by e.campaign'
     serializer_class = ReportsGenerationSerializer
     queryset = Events.objects.raw(sql)
     pagination_class = ReportsViewPagination
