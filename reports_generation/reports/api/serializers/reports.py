@@ -84,12 +84,14 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ReportsGenerationSerializer(serializers.Serializer):
-    # event_revenue_sum = serializers.IntegerField()
-    # event_revenue_usd_sum = serializers.IntegerField()
+    campaign = serializers.CharField(max_length=255)
+    event_revenue_sum = serializers.IntegerField(allow_null = True)
+    event_revenue_usd_sum = serializers.IntegerField(allow_null = True)
+    count_installs = serializers.IntegerField(allow_null = True)
 
     class Meta:
         model = Events
-        fields = ('id', 'campaign', 'event_revenue_sum', 'event_revenue_usd_sum', 'count_installs')
+        fields = ('campaign', 'event_revenue_sum', 'event_revenue_usd_sum', 'count_installs')
 
         # Post.objects.annotate(
 #             viewers_count= Count('viewers', distinct=True),

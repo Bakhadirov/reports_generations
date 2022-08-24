@@ -17,3 +17,11 @@ class Installs1Filter(filters.FilterSet):
     class Meta:
         model = Installs1
         fields = ('media_source', 'platform',)
+
+
+class ReportsViewFilter(filters.FilterSet):
+    campaign = filters.CharFilter(lookup_expr='icontains')
+
+    class Meta:
+        model = Events
+        fields = ('media_source', 'platform',)
