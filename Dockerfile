@@ -7,8 +7,11 @@ WORKDIR /project
 
 RUN pip install poetry
 COPY pyproject.toml poetry.lock ./
+COPY . .
 RUN POETRY_VIRTUALENVS_CREATE=false poetry install
 
-COPY . .
 
+CMD ["./manage.py", "runserver", "0.0.0.0:8000"]
+
+EXPOSE 8000
 STOPSIGNAL SIGTERM
